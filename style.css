@@ -1,0 +1,28 @@
+body {
+  background-color: rgb(36, 34, 39);
+}
+
+.app {
+  border-radius: 1em;
+  background-color: rgb(244, 237, 255);
+  padding: 0.2em;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.colors-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 250px;
+}
+
+.color {
+  width: 20%;
+  height: 100%;
+}
