@@ -26,16 +26,25 @@ fetch(api)
     }
   })
 
+btnClick.addEventListener('click', function () {
+  const getSeedColor = document
+    .querySelector('#scheme-color')
+    .value.split('#')
+    .join('')
+  const getSchemeColor = document.querySelector('#scheme-select').value
 
-  btnClick.addEventListener('click', function() {
-    const getSeedColor = document.querySelector('#scheme-color').value
-    const getSchemeColor = document.querySelector('#scheme-select').value
+  console.log(getSeedColor)
 
-    const getNormalHexa = getSeedColor.split('#').join('')
+  fetch(
+    `https://www.thecolorapi.com/scheme?hex=${getSeedColor}&mode=${getSchemeColor}&count=5`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      let getHexColorsArr = data.colors
 
-    fetch(`https://www.thecolorapi.com/scheme?hex=${getNormalHexa}&mode=${getSchemeColor}&count=5`)
-    .then(response => response.json())
-    .then(logOut => console.log(logOut))
-
-   })
-
+      console.log(getHexColorsArr)
+      for (const getHexColor of getHexColorsArr) {
+        console.log(getHexColor.hex.clean)
+      }
+    })
+})
