@@ -1,4 +1,5 @@
 const api = `https://www.thecolorapi.com/id?hex=${getRandomHexColors()}`
+const btnClick = document.querySelector('#get-scheme')
 
 function getRandomHexColors() {
   let letters = '0123456789ABCDEF'.split('')
@@ -12,7 +13,7 @@ function getRandomHexColors() {
 fetch(api)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data)
+    //console.log(data)
     document.querySelector('#first').style.backgroundColor = data.hex.value
     document.querySelector('#second').style.backgroundColor = data.hex.value
     document.querySelector('#third').style.backgroundColor = data.hex.value
@@ -24,3 +25,17 @@ fetch(api)
       getHexHtml[i].textContent = data.hex.value
     }
   })
+
+
+  btnClick.addEventListener('click', function() {
+    const getSeedColor = document.querySelector('#scheme-color').value
+    const getSchemeColor = document.querySelector('#scheme-select').value
+
+    const getNormalHexa = getSeedColor.split('#').join('')
+
+    fetch(`https://www.thecolorapi.com/scheme?hex=${getNormalHexa}&mode=${getSchemeColor}&count=5`)
+    .then(response => response.json())
+    .then(logOut => console.log(logOut))
+
+   })
+
