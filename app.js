@@ -33,18 +33,28 @@ btnClick.addEventListener('click', function () {
     .join('')
   const getSchemeColor = document.querySelector('#scheme-select').value
 
-  console.log(getSeedColor)
-
   fetch(
     `https://www.thecolorapi.com/scheme?hex=${getSeedColor}&mode=${getSchemeColor}&count=5`
   )
     .then((response) => response.json())
     .then((data) => {
       let getHexColorsArr = data.colors
-
       console.log(getHexColorsArr)
-      for (const getHexColor of getHexColorsArr) {
-        console.log(getHexColor.hex.clean)
-      }
+
+      const getColorDiv = Array.from(document.querySelectorAll('.color'))
+      getColorDiv.forEach((element, index) => {
+        if (index < getHexColorsArr.length) {
+          const getHexColor = getHexColorsArr[index]
+          element.style.backgroundColor = getHexColor.hex.value
+        }
+      })
+
+      const getHexDivs = Array.from(document.querySelectorAll('.hex'))
+      getHexDivs.forEach((element, index) => {
+        if (index < getHexColorsArr.length) {
+          const getHexValue = getHexColorsArr[index]
+          element.textContent = getHexValue.hex.value
+        }
+      })
     })
 })
